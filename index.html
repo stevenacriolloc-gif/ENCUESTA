@@ -1,0 +1,2280 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta — Preferencias Laborales | FCEA – Universidad de Cuenca</title>
+
+    <style>
+        /* ─── TOKENS ─────────────────────────────────────────────── */
+        :root {
+            --uc-blue: #1A236A;
+            --uc-blue-mid: #2E4057;
+            --uc-accent: #1565C0;
+            --uc-accent-lt: rgba(21, 101, 192, 0.12);
+            --page-bg: #f0f2f8;
+            --card-bg: #ffffff;
+            --text-dark: #1d1d1f;
+            --text-grey: #6e6e73;
+            --border: #d2d2d7;
+            --warn-bg: #fff8e1;
+            --warn-border: #f9a825;
+            --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* ─── RESET / BASE ───────────────────────────────────────── */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--page-bg);
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding: 40px 16px 60px;
+            font-size: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ─── CONTENEDOR PRINCIPAL ───────────────────────────────── */
+        .survey-container {
+            width: 100%;
+            max-width: 860px;
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 8px 40px rgba(26, 35, 106, 0.10);
+            padding: 48px 56px;
+        }
+
+        /* ─── HEADER ─────────────────────────────────────────────── */
+        .survey-header {
+            text-align: center;
+            margin-bottom: 32px;
+            padding-bottom: 28px;
+            border-bottom: 2px solid var(--uc-blue);
+        }
+
+        .header-logo {
+            font-size: 0.78em;
+            font-weight: 700;
+            color: var(--uc-blue);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .header-sub {
+            font-size: 0.82em;
+            color: var(--text-grey);
+            margin-bottom: 16px;
+        }
+
+        .survey-header h1 {
+            font-size: 1.75em;
+            font-weight: 700;
+            color: var(--uc-blue);
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+
+        .form-badge {
+            display: inline-block;
+            padding: 4px 18px;
+            border-radius: 999px;
+            font-size: 0.82em;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 14px;
+        }
+
+        .badge-a {
+            background: var(--uc-blue);
+            color: #fff;
+        }
+
+        .badge-b {
+            background: #1565C0;
+            color: #fff;
+        }
+
+        .survey-header p.intro {
+            font-size: 0.97em;
+            color: var(--text-grey);
+            line-height: 1.65;
+            text-align: justify;
+            max-width: 660px;
+            margin: 0 auto;
+        }
+
+        /* ─── SELECTOR DE FORMA ──────────────────────────────────── */
+        .form-selector {
+            background: var(--uc-accent-lt);
+            border: 1px solid rgba(21, 101, 192, 0.25);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .form-selector label.fs-label {
+            font-weight: 600;
+            font-size: 0.95em;
+            color: var(--uc-blue);
+            white-space: nowrap;
+        }
+
+        .toggle-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .toggle-btn {
+            padding: 8px 26px;
+            border: 2px solid var(--uc-blue);
+            border-radius: 10px;
+            font-family: var(--font);
+            font-size: 0.95em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #fff;
+            color: var(--uc-blue);
+        }
+
+        .toggle-btn.active-a {
+            background: var(--uc-blue);
+            color: #fff;
+        }
+
+        .toggle-btn.active-b {
+            background: #1565C0;
+            color: #fff;
+            border-color: #1565C0;
+        }
+
+        /* ─── PROGRESS BAR ───────────────────────────────────────── */
+        .progress-bar-wrap {
+            margin-bottom: 36px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.82em;
+            color: var(--text-grey);
+            margin-bottom: 6px;
+        }
+
+        .progress-track {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--uc-blue), var(--uc-accent));
+            border-radius: 999px;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* ─── SECCIÓN ────────────────────────────────────────────── */
+        section {
+            margin-top: 40px;
+        }
+
+        section h2 {
+            font-size: 1.15em;
+            font-weight: 700;
+            color: var(--uc-blue);
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        section h2 .sec-num {
+            background: var(--uc-blue);
+            color: #fff;
+            border-radius: 8px;
+            padding: 2px 10px;
+            font-size: 0.85em;
+        }
+
+        .section-intro {
+            font-size: 0.875em;
+            color: var(--text-grey);
+            margin-bottom: 24px;
+            line-height: 1.55;
+            padding: 10px 14px;
+            background: #f7f9ff;
+            border-left: 3px solid var(--uc-blue);
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* ─── BLOQUE DE PREGUNTA ─────────────────────────────────── */
+        .question-block {
+            margin-bottom: 32px;
+            padding: 20px 22px;
+            border: 1px solid transparent;
+            border-radius: 14px;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .question-block:hover {
+            border-color: rgba(21, 101, 192, 0.15);
+            background: #fafbff;
+        }
+
+        .question-block.answered {
+            border-color: rgba(21, 101, 192, 0.25);
+        }
+
+        .q-number {
+            display: inline-block;
+            font-size: 0.75em;
+            font-weight: 700;
+            color: var(--uc-accent);
+            background: var(--uc-accent-lt);
+            border-radius: 6px;
+            padding: 2px 8px;
+            margin-bottom: 8px;
+        }
+
+        .question-label {
+            display: block;
+            font-weight: 600;
+            font-size: 1.02em;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+            line-height: 1.45;
+        }
+
+        .question-hint {
+            font-size: 0.83em;
+            color: var(--text-grey);
+            margin-bottom: 14px;
+            font-style: italic;
+        }
+
+        .variable-tag {
+            font-size: 0.74em;
+            font-weight: 600;
+            background: #eef2ff;
+            color: var(--uc-blue-mid);
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        /* ─── INPUTS ─────────────────────────────────────────────── */
+        .styled-input,
+        .styled-select {
+            width: 100%;
+            padding: 11px 15px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: var(--font);
+            background: #fafafa;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            color: var(--text-dark);
+        }
+
+        .styled-input:focus,
+        .styled-select:focus {
+            outline: none;
+            border-color: var(--uc-accent);
+            box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.15);
+            background: #fff;
+        }
+
+        .input-inline {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-inline .styled-input {
+            max-width: 140px;
+        }
+
+        .input-inline span {
+            color: var(--text-grey);
+            font-size: 0.95em;
+        }
+
+        /* ─── RADIO / CHECKBOX ───────────────────────────────────── */
+        .radio-options,
+        .checkbox-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .radio-option,
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1.5px solid var(--border);
+            transition: background 0.18s, border-color 0.18s;
+            font-size: 0.97em;
+        }
+
+        .radio-option:hover,
+        .checkbox-option:hover {
+            background: #f0f4ff;
+            border-color: var(--uc-accent);
+        }
+
+        .radio-option input[type="radio"],
+        .checkbox-option input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .radio-custom {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .radio-custom::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: var(--uc-blue);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.2s ease;
+        }
+
+        .radio-option input[type="radio"]:checked+.radio-custom {
+            border-color: var(--uc-blue);
+        }
+
+        .radio-option input[type="radio"]:checked+.radio-custom::after {
+            transform: scale(1);
+        }
+
+        .radio-option:has(input[type="radio"]:checked) {
+            background: #eef2ff;
+            border-color: var(--uc-blue);
+            font-weight: 500;
+        }
+
+        .checkbox-custom {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: #fafafa;
+            transition: all 0.2s;
+        }
+
+        .checkbox-custom::after {
+            content: '';
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2.5px 2.5px 0;
+            transform: rotate(45deg) scale(0);
+            transition: transform 0.2s;
+        }
+
+        .checkbox-option input[type="checkbox"]:checked+.checkbox-custom {
+            background: var(--uc-blue);
+            border-color: var(--uc-blue);
+        }
+
+        .checkbox-option input[type="checkbox"]:checked+.checkbox-custom::after {
+            transform: rotate(45deg) scale(1);
+        }
+
+        /* ─── ESCALA LIKERT 5 PUNTOS ─────────────────────────────── */
+        .likert-scale {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .likert-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 10px 4px 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.18s, border-color 0.18s;
+        }
+
+        .likert-option:hover {
+            background: #f0f4ff;
+            border-color: var(--uc-accent);
+        }
+
+        .likert-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .likert-radio-custom {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .likert-radio-custom::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: var(--uc-blue);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: transform 0.2s;
+        }
+
+        .likert-option input[type="radio"]:checked+.likert-radio-custom {
+            border-color: var(--uc-blue);
+        }
+
+        .likert-option input[type="radio"]:checked+.likert-radio-custom::after {
+            transform: scale(1);
+        }
+
+        .likert-option:has(input:checked) {
+            background: #eef2ff;
+            border-color: var(--uc-blue);
+        }
+
+        .likert-num {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--uc-blue-mid);
+        }
+
+        .likert-desc {
+            font-size: 0.72em;
+            color: var(--text-grey);
+            line-height: 1.25;
+            margin-top: 3px;
+        }
+
+        .likert-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            padding: 0 2px;
+        }
+
+        .likert-labels span {
+            font-size: 0.76em;
+            color: var(--text-grey);
+            font-style: italic;
+        }
+
+        /* ─── ESCALA V/F DESEABILIDAD SOCIAL ────────────────────── */
+        .ds-grid {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 0;
+        }
+
+        .ds-row {
+            display: contents;
+        }
+
+        .ds-row .ds-text,
+        .ds-row .ds-vf {
+            padding: 10px 12px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.93em;
+            display: flex;
+            align-items: center;
+        }
+
+        .ds-row:last-child .ds-text,
+        .ds-row:last-child .ds-vf {
+            border-bottom: none;
+        }
+
+        .ds-row:nth-child(even) .ds-text,
+        .ds-row:nth-child(even) .ds-vf {
+            background: #fafbff;
+        }
+
+        .ds-num {
+            font-weight: 700;
+            color: var(--uc-accent);
+            margin-right: 8px;
+            min-width: 42px;
+            font-size: 0.85em;
+        }
+
+        .ds-star {
+            color: #e53935;
+            font-size: 0.8em;
+            margin-left: 2px;
+        }
+
+        .ds-vf {
+            gap: 16px;
+            justify-content: center;
+            white-space: nowrap;
+        }
+
+        .ds-vf label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.92em;
+            padding: 6px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            transition: background 0.15s, border-color 0.15s;
+        }
+
+        .ds-vf label:hover {
+            background: #f0f4ff;
+            border-color: var(--uc-accent);
+        }
+
+        .ds-vf label:has(input:checked) {
+            background: var(--uc-blue);
+            color: #fff;
+            border-color: var(--uc-blue);
+        }
+
+        .ds-vf input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        /* ─── NOTA INTERNA ───────────────────────────────────────── */
+        .internal-note {
+            background: var(--warn-bg);
+            border: 1.5px solid var(--warn-border);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-top: 24px;
+            font-size: 0.84em;
+            color: #5a3e00;
+            line-height: 1.6;
+        }
+
+        .internal-note strong {
+            color: #b06a00;
+        }
+
+        /* ─── BOTÓN SUBMIT ───────────────────────────────────────── */
+        .submit-section {
+            margin-top: 48px;
+            text-align: center;
+        }
+
+        .submit-section .thanks {
+            font-size: 1.02em;
+            color: var(--text-grey);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .submit-button {
+            display: inline-block;
+            padding: 14px 52px;
+            font-size: 1.08em;
+            font-weight: 700;
+            color: #fff;
+            background: linear-gradient(135deg, var(--uc-blue) 0%, var(--uc-accent) 100%);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(26, 35, 106, 0.25);
+        }
+
+        .submit-button:hover {
+            opacity: 0.88;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 28px rgba(26, 35, 106, 0.32);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        /* ─── RESPONSIVE ─────────────────────────────────────────── */
+        @media (max-width: 680px) {
+            .survey-container {
+                padding: 28px 18px;
+            }
+
+            .likert-scale {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 4px;
+            }
+
+            .likert-desc {
+                display: none;
+            }
+
+            .form-selector {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .likert-scale {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        /* ─── SECCIÓN HEXACO ESPECIAL ────────────────────────────── */
+        .hexaco-header {
+            background: linear-gradient(135deg, #1A236A 0%, #1565C0 100%);
+            color: white;
+            border-radius: 14px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+        }
+
+        .hexaco-header h3 {
+            font-size: 1.05em;
+            margin-bottom: 4px;
+        }
+
+        .hexaco-header p {
+            font-size: 0.85em;
+            opacity: 0.85;
+            line-height: 1.5;
+        }
+
+        .hexaco-form-label {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 6px;
+            padding: 2px 10px;
+            font-size: 0.78em;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="survey-container" id="survey-container">
+
+        <!-- ══ HEADER ═══════════════════════════════════════════════════════════ -->
+        <header class="survey-header">
+            <div class="header-logo">Universidad de Cuenca</div>
+            <div class="header-sub">Facultad de Ciencias Económicas y Administrativas &nbsp;|&nbsp; Econometría II</div>
+            <h1>Preferencias Laborales en Estudiantes de Economía</h1>
+            <div id="form-badge" class="form-badge badge-a">FORMA A</div>
+            <p class="intro">
+                La información que usted proporcione es <strong>completamente anónima y confidencial</strong>.
+                Sus respuestas serán utilizadas exclusivamente con fines académicos de investigación.
+                Por favor, responda con total sinceridad. No hay respuestas correctas ni incorrectas.
+            </p>
+        </header>
+
+        <!-- ══ SELECTOR FORMA ════════════════════════════════════════════════════ -->
+        <div class="form-selector">
+            <label class="fs-label">Versión del formulario:</label>
+            <div class="toggle-group">
+                <button type="button" class="toggle-btn active-a" id="btn-forma-a" onclick="setForma('A')">FORMA
+                    A</button>
+                <button type="button" class="toggle-btn" id="btn-forma-b" onclick="setForma('B')">FORMA B</button>
+            </div>
+        </div>
+
+        <!-- ══ BARRA DE PROGRESO ══════════════════════════════════════════════════ -->
+        <div class="progress-bar-wrap">
+            <div class="progress-label">
+                <span>Progreso</span>
+                <span id="progress-pct">0%</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+
+        <!-- ══ FORMULARIO ════════════════════════════════════════════════════════ -->
+        <form id="survey-form" method="POST" action="https://formspree.io/f/xrevbbvj">
+            <input type="hidden" name="forma" id="forma-hidden" value="A">
+
+            <!-- ─────────────────────────────────────────────────────────
+         SECCIÓN I — DATOS GENERALES
+    ──────────────────────────────────────────────────────────── -->
+            <section id="sec-datos">
+                <h2><span class="sec-num">I</span> Datos Generales</h2>
+
+                <!-- P1 Edad -->
+                <div class="question-block">
+                    <span class="q-number">1</span>
+                    <label class="question-label" for="edad">Edad actual (años cumplidos):</label>
+                    <div class="input-inline">
+                        <input type="number" id="edad" name="edad" class="styled-input" placeholder="Ej: 22" min="17"
+                            max="60" required>
+                        <span>años</span>
+                    </div>
+                </div>
+
+                <!-- P2 Sexo -->
+                <div class="question-block">
+                    <span class="q-number">2</span>
+                    <label class="question-label">Sexo:</label>
+                    <div class="radio-options">
+                        <label class="radio-option">
+                            <input type="radio" name="sexo" value="1" required>
+                            <span class="radio-custom"></span> Mujer &nbsp;<small
+                                style="color:var(--text-grey)">(1)</small>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="sexo" value="0">
+                            <span class="radio-custom"></span> Hombre &nbsp;<small
+                                style="color:var(--text-grey)">(0)</small>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- P3 Semestre -->
+                <div class="question-block">
+                    <span class="q-number">3</span>
+                    <label class="question-label" for="semestre">Semestre o ciclo que cursa actualmente:</label>
+                    <div class="input-inline">
+                        <input type="number" id="semestre" name="semestre" class="styled-input" placeholder="Ej: 8"
+                            min="7" max="10" required>
+                        <span>semestre</span>
+                    </div>
+                </div>
+
+                <!-- P4 Colegio -->
+                <div class="question-block">
+                    <span class="q-number">4</span>
+                    <label class="question-label">Tipo de colegio donde realizó sus estudios secundarios:</label>
+                    <div class="radio-options">
+                        <label class="radio-option">
+                            <input type="radio" name="privado" value="0" required>
+                            <span class="radio-custom"></span> Público &nbsp;<small
+                                style="color:var(--text-grey)">(0)</small>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="privado" value="1">
+                            <span class="radio-custom"></span> Privado o fiscomisional &nbsp;<small
+                                style="color:var(--text-grey)">(1)</small>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- P5 Sector preferido -->
+                <div class="question-block">
+                    <span class="q-number">5</span>
+                    <label class="question-label">¿En qué sector desea insertarse laboralmente al graduarse?<span
+                            class="variable-tag">Variable dependiente</span></label>
+                    <div class="radio-options">
+                        <label class="radio-option">
+                            <input type="radio" name="sector" value="0" required>
+                            <span class="radio-custom"></span> Sector Privado Formal &nbsp;<small
+                                style="color:var(--text-grey)">(0)</small>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="sector" value="1">
+                            <span class="radio-custom"></span> Sector Público &nbsp;<small
+                                style="color:var(--text-grey)">(1)</small>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="sector" value="2">
+                            <span class="radio-custom"></span> Cuenta propia / Autoempleo &nbsp;<small
+                                style="color:var(--text-grey)">(2)</small>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- P6 Carga familiar -->
+                <div class="question-block">
+                    <span class="q-number">6</span>
+                    <label class="question-label">¿Tiene personas bajo su sustento económico directo (hijos o
+                        padres)?</label>
+                    <div class="radio-options">
+                        <label class="radio-option">
+                            <input type="radio" name="carga_fam" value="1" required>
+                            <span class="radio-custom"></span> Sí &nbsp;<small
+                                style="color:var(--text-grey)">(1)</small>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="carga_fam" value="0">
+                            <span class="radio-custom"></span> No &nbsp;<small
+                                style="color:var(--text-grey)">(0)</small>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- P7 Sector padres -->
+                <div class="question-block">
+                    <span class="q-number">7</span>
+                    <label class="question-label">¿En qué sector trabajan o trabajaron principalmente sus padres?<span
+                            class="variable-tag">Herencia_ocu</span></label>
+                    <div class="radio-options">
+                        <label class="radio-option">
+                            <input type="radio" name="herencia_ocu" value="0" required>
+                            <span class="radio-custom"></span> Sector Público &nbsp;<small
+                                style="color:var(--text-grey)">(0)</small>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="herencia_ocu" value="1">
+                            <span class="radio-custom"></span> Sector Privado &nbsp;<small
+                                style="color:var(--text-grey)">(1)</small>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="herencia_ocu" value="2">
+                            <span class="radio-custom"></span> Cuenta propia &nbsp;<small
+                                style="color:var(--text-grey)">(2)</small>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- P8 Ingreso familiar -->
+                <div class="question-block">
+                    <span class="q-number">8</span>
+                    <label class="question-label">¿Cuál es el rango de ingreso aproximado (USD) de su núcleo
+                        familiar?<span class="variable-tag">Ingreso_fam</span></label>
+                    <div class="radio-options">
+                        <label class="radio-option"><input type="radio" name="ingreso_fam" value="1" required><span
+                                class="radio-custom"></span> Menos de $482</label>
+                        <label class="radio-option"><input type="radio" name="ingreso_fam" value="2"><span
+                                class="radio-custom"></span> $482 – $960</label>
+                        <label class="radio-option"><input type="radio" name="ingreso_fam" value="3"><span
+                                class="radio-custom"></span> $960 – $1.920</label>
+                        <label class="radio-option"><input type="radio" name="ingreso_fam" value="4"><span
+                                class="radio-custom"></span> $1.920 – $2.890</label>
+                        <label class="radio-option"><input type="radio" name="ingreso_fam" value="5"><span
+                                class="radio-custom"></span> Más de $2.890</label>
+                    </div>
+                </div>
+
+                <!-- P9 Contactos -->
+                <div class="question-block">
+                    <span class="q-number">9</span>
+                    <label class="question-label">¿Posee contactos o redes personales que podrían facilitarle el ingreso
+                        al sector
+                        de su interés?<span class="variable-tag">Contacto</span></label>
+                    <div class="radio-options">
+                        <label class="radio-option"><input type="radio" name="contacto" value="1" required><span
+                                class="radio-custom"></span> Sí &nbsp;<small
+                                style="color:var(--text-grey)">(1)</small></label>
+                        <label class="radio-option"><input type="radio" name="contacto" value="0"><span
+                                class="radio-custom"></span>
+                            No &nbsp;<small style="color:var(--text-grey)">(0)</small></label>
+                    </div>
+                </div>
+
+                <!-- P10 Ingreso esperado -->
+                <div class="question-block">
+                    <span class="q-number">10</span>
+                    <label class="question-label">Monto mensual (USD) que aspira ganar en su primer empleo:<span
+                            class="variable-tag">Ingreso_esp</span></label>
+                    <div class="radio-options">
+                        <label class="radio-option"><input type="radio" name="ingreso_esp" value="1" required><span
+                                class="radio-custom"></span> Menos de $482</label>
+                        <label class="radio-option"><input type="radio" name="ingreso_esp" value="2"><span
+                                class="radio-custom"></span> $482 – $960</label>
+                        <label class="radio-option"><input type="radio" name="ingreso_esp" value="3"><span
+                                class="radio-custom"></span> $960 – $1.440</label>
+                        <label class="radio-option"><input type="radio" name="ingreso_esp" value="4"><span
+                                class="radio-custom"></span> Más de $1.440</label>
+                    </div>
+                </div>
+
+                <!-- PA Participación política -->
+                <div class="question-block">
+                    <span class="q-number">A</span>
+                    <label class="question-label">¿Ha militado, participado activamente o ejercido algún cargo en un
+                        partido,
+                        movimiento o colectivo político?<span class="variable-tag">Particip_pol (A)</span></label>
+                    <div class="radio-options">
+                        <label class="radio-option"><input type="radio" name="particip_pol_binaria" value="1"
+                                required><span class="radio-custom"></span> Sí &nbsp;<small
+                                style="color:var(--text-grey)">(1)</small></label>
+                        <label class="radio-option"><input type="radio" name="particip_pol_binaria" value="0"><span
+                                class="radio-custom"></span> No &nbsp;<small
+                                style="color:var(--text-grey)">(0)</small></label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ─────────────────────────────────────────────────────────
+         SECCIÓN II — ACUERDO CON AFIRMACIONES
+    ──────────────────────────────────────────────────────────── -->
+            <section id="sec-likert">
+                <h2><span class="sec-num">II</span> Acuerdo con Afirmaciones y Valoraciones</h2>
+                <div class="section-intro">
+                    Escala: <strong>1 = Totalmente en desacuerdo</strong> &nbsp;—&nbsp; <strong>5 = Totalmente de
+                        acuerdo</strong>&nbsp; (salvo indicación contraria en la pregunta).
+                </div>
+
+                <!-- Función auxiliar para generar Likert -->
+
+                <!-- P11 Riesgo -->
+                <div class="question-block">
+                    <span class="q-number">11</span>
+                    <label class="question-label">Prefiero una fuente de ingresos estable y predecible, aunque sea
+                        moderada o
+                        baja, frente a la posibilidad de obtener ingresos muy altos pero con gran incertidumbre.<span
+                            class="variable-tag">Riesgo</span></label>
+                    <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                            acuerdo</span>
+                    </div>
+                    <div class="likert-scale">
+                        <label class="likert-option"><input type="radio" name="riesgo" value="1" required><span
+                                class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                        <label class="likert-option"><input type="radio" name="riesgo" value="2"><span
+                                class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                        <label class="likert-option"><input type="radio" name="riesgo" value="3"><span
+                                class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                        <label class="likert-option"><input type="radio" name="riesgo" value="4"><span
+                                class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                        <label class="likert-option"><input type="radio" name="riesgo" value="5"><span
+                                class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                    </div>
+                </div>
+
+                <!-- P12 Autoeficacia 1 -->
+                <div class="question-block">
+                    <span class="q-number">12</span>
+                    <label class="question-label">Confío plenamente en mis capacidades para alcanzar cualquier meta
+                        profesional
+                        que me proponga.<span class="variable-tag">Autoeficacia</span></label>
+                    <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                            acuerdo</span>
+                    </div>
+                    <div class="likert-scale">
+                        <label class="likert-option"><input type="radio" name="autoeficacia1" value="1" required><span
+                                class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                        <label class="likert-option"><input type="radio" name="autoeficacia1" value="2"><span
+                                class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                        <label class="likert-option"><input type="radio" name="autoeficacia1" value="3"><span
+                                class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                        <label class="likert-option"><input type="radio" name="autoeficacia1" value="4"><span
+                                class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                        <label class="likert-option"><input type="radio" name="autoeficacia1" value="5"><span
+                                class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                    </div>
+                </div>
+
+                <!-- P13 Autoeficacia 2 -->
+                <div class="question-block">
+                    <span class="q-number">13</span>
+                    <label class="question-label">Me siento capaz de resolver problemas complejos en mi entorno
+                        profesional de
+                        manera efectiva.<span class="variable-tag">Autoeficacia</span></label>
+                    <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                            acuerdo</span>
+                    </div>
+                    <div class="likert-scale">
+                        <label class="likert-option"><input type="radio" name="autoeficacia2" value="1" required><span
+                                class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                        <label class="likert-option"><input type="radio" name="autoeficacia2" value="2"><span
+                                class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                        <label class="likert-option"><input type="radio" name="autoeficacia2" value="3"><span
+                                class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                        <label class="likert-option"><input type="radio" name="autoeficacia2" value="4"><span
+                                class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                        <label class="likert-option"><input type="radio" name="autoeficacia2" value="5"><span
+                                class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                    </div>
+                </div>
+
+                <!-- P14 Consumo-ocio -->
+                <div class="question-block">
+                    <span class="q-number">14</span>
+                    <label class="question-label">En mi tiempo libre prefiero descansar y disfrutar actividades
+                        personales antes
+                        que trabajar horas adicionales por más dinero.<span
+                            class="variable-tag">Consumo_ocio</span></label>
+                    <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                            acuerdo</span>
+                    </div>
+                    <div class="likert-scale">
+                        <label class="likert-option"><input type="radio" name="consumo_ocio" value="1" required><span
+                                class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                        <label class="likert-option"><input type="radio" name="consumo_ocio" value="2"><span
+                                class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                        <label class="likert-option"><input type="radio" name="consumo_ocio" value="3"><span
+                                class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                        <label class="likert-option"><input type="radio" name="consumo_ocio" value="4"><span
+                                class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                        <label class="likert-option"><input type="radio" name="consumo_ocio" value="5"><span
+                                class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                    </div>
+                </div>
+
+                <!-- P15 Hogar -->
+                <div class="question-block">
+                    <span class="q-number">15</span>
+                    <label class="question-label">¿Qué importancia le daban en el hogar donde usted creció a la
+                        formación en
+                        ética, valores y/o religión?<span class="variable-tag">Instrumento: Hogar</span></label>
+                    <div class="likert-labels"><span>1 — Ninguna importancia</span><span>5 — Mucha importancia</span>
+                    </div>
+                    <div class="likert-scale">
+                        <label class="likert-option"><input type="radio" name="hogar" value="1" required><span
+                                class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                        <label class="likert-option"><input type="radio" name="hogar" value="2"><span
+                                class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                        <label class="likert-option"><input type="radio" name="hogar" value="3"><span
+                                class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                        <label class="likert-option"><input type="radio" name="hogar" value="4"><span
+                                class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                        <label class="likert-option"><input type="radio" name="hogar" value="5"><span
+                                class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                    </div>
+                </div>
+
+                <!-- P16 Servicio -->
+                <div class="question-block">
+                    <span class="q-number">16</span>
+                    <label class="question-label">¿Con qué frecuencia ha participado en entornos de refuerzo moral
+                        (voluntariado,
+                        servicio social, Scouts, misiones religiosas)?<span class="variable-tag">Instrumento:
+                            Servicio</span></label>
+                    <div class="likert-labels"><span>1 — Nunca</span><span>5 — Muy frecuentemente</span></div>
+                    <div class="likert-scale">
+                        <label class="likert-option"><input type="radio" name="servicio" value="1" required><span
+                                class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                        <label class="likert-option"><input type="radio" name="servicio" value="2"><span
+                                class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                        <label class="likert-option"><input type="radio" name="servicio" value="3"><span
+                                class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                        <label class="likert-option"><input type="radio" name="servicio" value="4"><span
+                                class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                        <label class="likert-option"><input type="radio" name="servicio" value="5"><span
+                                class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                    </div>
+                </div>
+
+                <!-- PB Interés político -->
+                <div class="question-block">
+                    <span class="q-number">B</span>
+                    <label class="question-label">¿Qué tan interesado/a está usted en los asuntos políticos del
+                        país?<span class="variable-tag">Particip_pol (B)</span></label>
+                    <div class="likert-labels"><span>1 — Nada interesado/a</span><span>5 — Muy interesado/a</span></div>
+                    <div class="likert-scale">
+                        <label class="likert-option"><input type="radio" name="interes_pol" value="1" required><span
+                                class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                        <label class="likert-option"><input type="radio" name="interes_pol" value="2"><span
+                                class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                        <label class="likert-option"><input type="radio" name="interes_pol" value="3"><span
+                                class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                        <label class="likert-option"><input type="radio" name="interes_pol" value="4"><span
+                                class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                        <label class="likert-option"><input type="radio" name="interes_pol" value="5"><span
+                                class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                    </div>
+                </div>
+
+                <!-- PC Percepción corrupción -->
+                <div class="question-block">
+                    <span class="q-number">C</span>
+                    <label class="question-label">¿En qué medida considera usted que existe corrupción en el sector
+                        público
+                        ecuatoriano?<span class="variable-tag">Percep_corrup</span></label>
+                    <div class="likert-labels"><span>1 — Casi ninguna</span><span>5 — Extremadamente alta</span></div>
+                    <div class="likert-scale">
+                        <label class="likert-option"><input type="radio" name="percep_corrup" value="1" required><span
+                                class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                        <label class="likert-option"><input type="radio" name="percep_corrup" value="2"><span
+                                class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                        <label class="likert-option"><input type="radio" name="percep_corrup" value="3"><span
+                                class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                        <label class="likert-option"><input type="radio" name="percep_corrup" value="4"><span
+                                class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                        <label class="likert-option"><input type="radio" name="percep_corrup" value="5"><span
+                                class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                    </div>
+                </div>
+
+                <!-- P17 Referente -->
+                <div class="question-block">
+                    <span class="q-number">17</span>
+                    <label class="question-label">¿Identifica usted a una figura de autoridad (padre, familiar, docente
+                        o mentor)
+                        reconocida por su integridad que sea su modelo de rol?<span class="variable-tag">Instrumento:
+                            Referente</span></label>
+                    <div class="radio-options">
+                        <label class="radio-option"><input type="radio" name="referente" value="1" required><span
+                                class="radio-custom"></span> Sí &nbsp;<small
+                                style="color:var(--text-grey)">(1)</small></label>
+                        <label class="radio-option"><input type="radio" name="referente" value="0"><span
+                                class="radio-custom"></span> No &nbsp;<small
+                                style="color:var(--text-grey)">(0)</small></label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ─────────────────────────────────────────────────────────
+         SECCIÓN III — HEXACO-HH
+         Los ítems cambian según FORMA A / FORMA B
+    ──────────────────────────────────────────────────────────── -->
+            <section id="sec-hexaco">
+                <h2><span class="sec-num">III</span> Honestidad-Humildad (HEXACO-HH)</h2>
+
+                <!-- FORMA A -->
+                <div id="hexaco-a">
+                    <div class="hexaco-header">
+                        <div class="hexaco-form-label">FORMA A</div>
+                        <h3>Instrucciones</h3>
+                        <p>Indique su grado de acuerdo con cada afirmación.<br>
+                            <strong>1 = Totalmente en desacuerdo &nbsp;—&nbsp; 5 = Totalmente de acuerdo</strong><br>
+                            No hay respuestas correctas ni incorrectas.
+                        </p>
+                    </div>
+
+                    <!-- Macro para ítems HEXACO -->
+                    <!-- item 18-A -->
+                    <div class="question-block">
+                        <span class="q-number">18</span>
+                        <label class="question-label">Si quiero algo de una persona que no me gusta, me comportaré con
+                            ella de un
+                            modo muy amable para conseguirlo.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_18" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_18" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_18" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_18" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_18" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">19</span>
+                        <label class="question-label">Si supiera que nunca sería descubierto, estaría dispuesto a robar
+                            un millón de
+                            dólares.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_19" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_19" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_19" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_19" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_19" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">20</span>
+                        <label class="question-label">Tener mucho dinero no es especialmente importante para mí.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_20" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_20" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_20" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_20" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_20" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">21</span>
+                        <label class="question-label">Creo que tengo derecho a que se me respete más que a la persona
+                            media.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_21" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_21" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_21" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_21" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_21" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">22</span>
+                        <label class="question-label">Estaría muy tentado de usar dinero falso si estuviera seguro de
+                            que no me iban
+                            a descubrir.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_22" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_22" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_22" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_22" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_22" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">23</span>
+                        <label class="question-label">No me gustaría nada que la gente pensara que soy rico.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_23" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_23" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_23" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_23" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_23" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">24</span>
+                        <label class="question-label">Quiero que la gente sepa que soy una persona especial.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_24" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_24" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_24" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_24" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_24" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">25</span>
+                        <label class="question-label">No adularía a nadie para conseguir un ascenso o un aumento de
+                            sueldo, incluso
+                            si creyera que funcionaría.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_25" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_25" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_25" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_25" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_25" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">26</span>
+                        <label class="question-label">Estaría dispuesto a aceptar un soborno, aunque fuera de una
+                            cantidad
+                            pequeña.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_26" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_26" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_26" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_26" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_26" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">27</span>
+                        <label class="question-label">Me gustaría vivir en una urbanización muy cara.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_27" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_27" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_27" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_27" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_27" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">28</span>
+                        <label class="question-label">Creo que soy una persona normal, ni mejor ni peor que los
+                            demás.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_28" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_28" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_28" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_28" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_28" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">29</span>
+                        <label class="question-label">Si sé que alguien me cae mal, lo trato con amabilidad para sacar
+                            ventaja de
+                            ello.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_29" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_29" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_29" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_29" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_29" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">30</span>
+                        <label class="question-label">Si pudiera cometer un fraude para obtener mucho dinero y supiera
+                            que no me
+                            descubrirían, lo haría.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_30" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_30" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_30" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_30" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_30" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">31</span>
+                        <label class="question-label">No me interesa especialmente ser dueño de objetos de lujo.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_31" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_31" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_31" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_31" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_31" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">32</span>
+                        <label class="question-label">Quiero que la gente sepa que soy una persona importante, de alto
+                            estatus.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_32" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_32" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_32" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_32" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_32" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="internal-note">
+                        <strong>⚠ NOTA INTERNA — NO mostrar al encuestado:</strong><br>
+                        FORMA A — Ítems HEXACO en sentido <strong>INVERSO</strong>: puntaje alto = menos integridad.<br>
+                        Cálculo del Índice H-H: para CADA ítem aplique (6 − valor reportado), luego saque el promedio de
+                        los 15
+                        ítems transformados. Rango final: 1–5.<br>
+                        <em>Excepción:</em> ítems 20, 23, 25, 28 y 31 ya están en sentido DIRECTO — inclúyalos
+                        directamente en el
+                        promedio SIN invertir.
+                    </div>
+                </div><!-- /hexaco-a -->
+
+                <!-- FORMA B -->
+                <div id="hexaco-b" style="display:none;">
+                    <div class="hexaco-header" style="background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);">
+                        <div class="hexaco-form-label">FORMA B</div>
+                        <h3>Instrucciones</h3>
+                        <p>Indique su grado de acuerdo con cada afirmación.<br>
+                            <strong>1 = Totalmente en desacuerdo &nbsp;—&nbsp; 5 = Totalmente de acuerdo</strong><br>
+                            No hay respuestas correctas ni incorrectas.
+                        </p>
+                    </div>
+
+                    <div class="question-block">
+                        <span class="q-number">18</span>
+                        <label class="question-label">Trato a las personas con amabilidad genuina, no para obtener
+                            ventajas de
+                            ellas.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_18" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_18" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_18" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_18" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_18" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">19</span>
+                        <label class="question-label">Actuaría con honestidad incluso si supiera que nunca me van a
+                            descubrir.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_19" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_19" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_19" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_19" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_19" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">20</span>
+                        <label class="question-label">Tener mucho dinero no es especialmente importante para mí.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_20" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_20" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_20" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_20" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_20" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">21</span>
+                        <label class="question-label">Merezco el mismo respeto que cualquier otra persona, ni más ni
+                            menos.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_21" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_21" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_21" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_21" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_21" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">22</span>
+                        <label class="question-label">Rechazaría usar dinero falso incluso si estuviera completamente
+                            seguro de que
+                            no me descubrirían.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_22" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_22" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_22" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_22" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_22" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">23</span>
+                        <label class="question-label">Prefiero que la gente me valore por lo que soy, no por mis
+                            posesiones
+                            materiales.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_23" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_23" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_23" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_23" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_23" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">24</span>
+                        <label class="question-label">Me siento cómodo siendo una persona del montón, sin necesidad de
+                            destacar.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_24" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_24" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_24" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_24" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_24" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">25</span>
+                        <label class="question-label">Prefiero ser honesto con las personas antes que halagarlas para
+                            obtener lo que
+                            quiero.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_25" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_25" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_25" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_25" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_25" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">26</span>
+                        <label class="question-label">Rechazaría cualquier soborno, incluso si fuera de una cantidad muy
+                            pequeña.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_26" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_26" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_26" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_26" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_26" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">27</span>
+                        <label class="question-label">Prefiero una vivienda sencilla y cómoda antes que una casa de
+                            lujo.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_27" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_27" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_27" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_27" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_27" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">28</span>
+                        <label class="question-label">Me considero una persona normal, ni mejor ni peor que los
+                            demás.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_28" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_28" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_28" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_28" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_28" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">29</span>
+                        <label class="question-label">Soy honesto con las personas sobre mis sentimientos hacia ellas,
+                            sin manipular
+                            la situación.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_29" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_29" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_29" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_29" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_29" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">30</span>
+                        <label class="question-label">Me negaría a cometer fraude para obtener dinero, incluso si
+                            supiera que no me
+                            descubrirían.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_30" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_30" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_30" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_30" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_30" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">31</span>
+                        <label class="question-label">Valoro las cosas por su utilidad, no por ser objetos de lujo o
+                            estatus.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_31" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_31" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_31" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_31" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_31" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+                    <div class="question-block">
+                        <span class="q-number">32</span>
+                        <label class="question-label">No necesito que los demás me perciban como una persona de alto
+                            estatus o
+                            importancia social.</label>
+                        <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
+                                acuerdo</span>
+                        </div>
+                        <div class="likert-scale">
+                            <label class="likert-option"><input type="radio" name="hh_32" value="1" required><span
+                                    class="likert-radio-custom"></span><span class="likert-num">1</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_32" value="2"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">2</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_32" value="3"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">3</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_32" value="4"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">4</span></label>
+                            <label class="likert-option"><input type="radio" name="hh_32" value="5"><span
+                                    class="likert-radio-custom"></span><span class="likert-num">5</span></label>
+                        </div>
+                    </div>
+
+                    <div class="internal-note">
+                        <strong>⚠ NOTA INTERNA — NO mostrar al encuestado:</strong><br>
+                        FORMA B — Ítems HEXACO en sentido <strong>DIRECTO</strong>: puntaje alto = más integridad.<br>
+                        Cálculo del Índice H-H: promedio simple de los 15 ítems (18–32) <strong>SIN ninguna
+                            transformación</strong>.
+                        Rango: 1–5.
+                    </div>
+                </div><!-- /hexaco-b -->
+            </section>
+
+            <!-- ─────────────────────────────────────────────────────────
+         SECCIÓN IV — DESEABILIDAD SOCIAL
+    ──────────────────────────────────────────────────────────── -->
+            <section id="sec-ds">
+                <h2><span class="sec-num">IV</span> Escala de Deseabilidad Social</h2>
+                <div class="section-intro">
+                    Lea cada frase y decida si su forma habitual de ser se parece
+                    <strong>V (Verdadero)</strong> o <strong>F (Falso)</strong> al contenido.
+                    No deje ninguna frase sin responder.
+                </div>
+
+                <div class="ds-grid">
+                    <!-- helper macro expanded for all 33 DS items -->
+                    <!-- DS items: asterisk = reverse scored. No asterisk = score 1 if V -->
+                    <!-- The asterisk (*) items are shown with a red ★ superscript -->
+
+                    <!-- DS1 -->
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS1</span>Antes de votar me informo detalladamente de
+                            la capacidad
+                            de todos los candidatos.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds1" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds1" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS2</span>Nunca dudo en dejar lo que estoy haciendo
+                            para ayudar a
+                            alguien con problemas.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds2" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds2" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS3<span class="ds-star">★</span></span>A veces me
+                            cuesta ponerme
+                            a trabajar si no me encuentro con ánimos.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds3" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds3" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS4</span>Nunca me ha caído nadie realmente mal.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds4" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds4" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS5<span class="ds-star">★</span></span>Algunas veces
+                            dudo de mi
+                            habilidad para triunfar en la vida.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds5" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds5" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS6<span class="ds-star">★</span></span>A veces estoy
+                            descontento
+                            cuando no puedo hacer las cosas a mi manera.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds6" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds6" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS7</span>Siempre soy muy cuidadoso con mi manera de
+                            vestir.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds7" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds7" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS8</span>En casa, me comporto tan bien en la mesa
+                            como cuando voy
+                            a un restaurante.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds8" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds8" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS9<span class="ds-star">★</span></span>Si pudiera
+                            entrar en una
+                            sala de cine sin pagar y estuviera seguro de que no me vieran, probablemente lo haría.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds9" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds9" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS10<span class="ds-star">★</span></span>En algunas
+                            ocasiones he
+                            renunciado a hacer algo porque pensaba que me faltaba habilidad.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds10" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds10" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS11<span class="ds-star">★</span></span>A veces me
+                            gusta
+                            chismorrear un poco.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds11" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds11" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS12<span class="ds-star">★</span></span>Ha habido
+                            veces en que he
+                            tenido sentimientos de rebeldía contra personas con autoridad, aun sabiendo que ellos tenían
+                            la razón.
+                        </div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds12" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds12" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS13</span>Independientemente de con quién esté
+                            hablando, siempre
+                            escucho atentamente.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds13" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds13" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS14<span class="ds-star">★</span></span>Alguna vez me
+                            he «hecho
+                            el loco» para quitarme a alguien de encima.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds14" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds14" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS15<span class="ds-star">★</span></span>En alguna
+                            ocasión me he
+                            aprovechado de alguien.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds15" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds15" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS16</span>Cuando cometo un error siempre estoy
+                            dispuesto a
+                            admitirlo.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds16" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds16" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS17</span>Siempre intento practicar lo que predico.
+                        </div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds17" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds17" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS18</span>No encuentro particularmente difícil
+                            relacionarme con
+                            gente escandalosa y detestable.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds18" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds18" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS19<span class="ds-star">★</span></span>A veces trato
+                            de vengarme
+                            en lugar de perdonar y olvidar lo que me han hecho.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds19" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds19" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS20</span>Cuando no sé algo no me importa admitirlo.
+                        </div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds20" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds20" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS21</span>Siempre soy cortés, aun con gente
+                            desagradable.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds21" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds21" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS22<span class="ds-star">★</span></span>A veces
+                            insisto en hacer
+                            las cosas a mi manera.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds22" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds22" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS23<span class="ds-star">★</span></span>En algunas
+                            ocasiones
+                            siento que soy un manazas.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds23" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds23" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS24</span>Nunca he dejado que alguien fuera castigado
+                            por cosas
+                            que había hecho yo.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds24" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds24" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS25</span>Nunca me enfado cuando me piden que
+                            devuelva algún
+                            favor que me han hecho.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds25" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds25" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS26</span>Nunca me irrito cuando la gente expresa
+                            ideas muy
+                            distintas de las mías.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds26" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds26" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS27</span>Nunca emprendo un viaje largo sin revisar
+                            el coche
+                            (moto, bici, etc.).</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds27" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds27" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS28<span class="ds-star">★</span></span>En algunas
+                            ocasiones me
+                            he sentido bastante celoso de la buena fortuna de los demás.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds28" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds28" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS29</span>Aún no he tenido nunca la necesidad de
+                            decirle a
+                            alguien que me dejara en paz.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds29" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds29" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS30<span class="ds-star">★</span></span>A veces me
+                            irrita la
+                            gente que me pide favores.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds30" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds30" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS31</span>Nunca me ha parecido que me castigaran sin
+                            motivo.
+                        </div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds31" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds31" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS32<span class="ds-star">★</span></span>A veces
+                            pienso que cuando
+                            la gente tiene mala suerte es porque se lo merece.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds32" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds32" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                    <div class="ds-row">
+                        <div class="ds-text"><span class="ds-num">DS33</span>Nunca he dicho deliberadamente nada que
+                            pudiera herir
+                            los sentimientos de alguien.</div>
+                        <div class="ds-vf">
+                            <label><input type="radio" name="ds33" value="V" required><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>V</label>
+                            <label><input type="radio" name="ds33" value="F"><span class="radio-custom"
+                                    style="width:16px;height:16px;margin-right:6px;"></span>F</label>
+                        </div>
+                    </div>
+                </div><!-- /ds-grid -->
+            </section>
+
+            <!-- ══ SUBMIT ══════════════════════════════════════════════════════════ -->
+            <div class="submit-section">
+                <p class="thanks">
+                    ¡Muchas gracias por su participación!<br>
+                    Sus respuestas son completamente anónimas y serán utilizadas exclusivamente con fines académicos.
+                </p>
+                <button type="submit" class="submit-button">Enviar respuestas</button>
+            </div>
+
+        </form>
+    </div><!-- /survey-container -->
+
+    <!-- ══ JAVASCRIPT ══════════════════════════════════════════════════════════ -->
+    <script>
+        /* ── Cambio de forma A / B ─────────────────────────────────── */
+        function setForma(forma) {
+            document.getElementById('forma-hidden').value = forma;
+            document.getElementById('form-badge').textContent = 'FORMA ' + forma;
+            document.getElementById('form-badge').className = 'form-badge badge-' + forma.toLowerCase();
+
+            // Toggle botones
+            document.getElementById('btn-forma-a').className = 'toggle-btn' + (forma === 'A' ? ' active-a' : '');
+            document.getElementById('btn-forma-b').className = 'toggle-btn' + (forma === 'B' ? ' active-b' : '');
+
+            // Toggle secciones HEXACO
+            document.getElementById('hexaco-a').style.display = (forma === 'A') ? '' : 'none';
+            document.getElementById('hexaco-b').style.display = (forma === 'B') ? '' : 'none';
+
+            // Limpiar respuestas HEXACO al cambiar
+            for (let i = 18; i <= 32; i++) {
+                const inputs = document.querySelectorAll(`input[name="hh_${i}"]`);
+                inputs.forEach(inp => inp.checked = false);
+            }
+            updateProgress();
+        }
+
+        /* ── Barra de progreso ─────────────────────────────────────── */
+        function updateProgress() {
+            const form = document.getElementById('survey-form');
+            // Obtener todos los grupos de inputs requeridos
+            const requiredNames = new Set(
+                [...form.querySelectorAll('[required]')].map(el => el.name)
+            );
+            let answered = 0;
+            requiredNames.forEach(name => {
+                const group = form.querySelectorAll(`[name="${name}"]`);
+                const isAnswered = [...group].some(el => {
+                    if (el.type === 'radio' || el.type === 'checkbox') return el.checked;
+                    return el.value.trim() !== '';
+                });
+                if (isAnswered) answered++;
+            });
+            const pct = Math.round((answered / requiredNames.size) * 100);
+            document.getElementById('progress-fill').style.width = pct + '%';
+            document.getElementById('progress-pct').textContent = pct + '%';
+        }
+
+        /* ── Marcar pregunta como respondida ──────────────────────── */
+        function markAnswered(el) {
+            const block = el.closest('.question-block');
+            if (block) block.classList.add('answered');
+            updateProgress();
+        }
+
+        document.getElementById('survey-form').addEventListener('change', function (e) {
+            markAnswered(e.target);
+        });
+        document.getElementById('survey-form').addEventListener('input', function (e) {
+            markAnswered(e.target);
+        });
+
+        /* ── Inicializar en Forma A ────────────────────────────────── */
+        setForma('A');
+    </script>
+
+</body>
+
+</html>
