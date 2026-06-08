@@ -593,22 +593,6 @@
             opacity: 0;
         }
 
-        /* ─── NOTA INTERNA ───────────────────────────────────────── */
-        .internal-note {
-            background: var(--warn-bg);
-            border: 1.5px solid var(--warn-border);
-            border-radius: 12px;
-            padding: 16px 20px;
-            margin-top: 24px;
-            font-size: 0.84em;
-            color: #5a3e00;
-            line-height: 1.6;
-        }
-
-        .internal-note strong {
-            color: #b06a00;
-        }
-
         /* ─── BOTÓN SUBMIT ───────────────────────────────────────── */
         .submit-section {
             margin-top: 48px;
@@ -821,7 +805,7 @@
                     <div class="radio-options">
                         <label class="radio-option">
                             <input type="radio" name="sector" value="0" required>
-                            <span class="radio-custom"></span> Sector Privado Formal &nbsp;<small
+                            <span class="radio-custom"></span> Sector Privado &nbsp;<small
                                 style="color:var(--text-grey)">(0)</small>
                         </label>
                         <label class="radio-option">
@@ -964,12 +948,9 @@
                 <!-- P11 Riesgo -->
                 <div class="question-block">
                     <span class="q-number">11</span>
-                    <label class="question-label">Prefiero una fuente de ingresos estable y predecible, aunque sea
-                        moderada o
-                        baja, frente a la posibilidad de obtener ingresos muy altos pero con gran incertidumbre.<span
+                    <label class="question-label">En general, ¿qué tan dispuesto/a está usted a asumir riesgos?<span
                             class="variable-tag">Riesgo</span></label>
-                    <div class="likert-labels"><span>1 — Totalmente en desacuerdo</span><span>5 — Totalmente de
-                            acuerdo</span>
+                    <div class="likert-labels"><span>1 — Nada dispuesto</span><span>5 — Totalmente dispuesto</span>
                     </div>
                     <div class="likert-scale">
                         <label class="likert-option"><input type="radio" name="riesgo" value="1" required><span
@@ -1481,16 +1462,6 @@
                         </div>
                     </div>
 
-                    <div class="internal-note">
-                        <strong>⚠ NOTA INTERNA — NO mostrar al encuestado:</strong><br>
-                        FORMA A — Ítems HEXACO en sentido <strong>INVERSO</strong>: puntaje alto = menos integridad.<br>
-                        Cálculo del Índice H-H: para CADA ítem aplique (6 − valor reportado), luego saque el promedio de
-                        los 15
-                        ítems transformados. Rango final: 1–5.<br>
-                        <em>Excepción:</em> ítems 20, 23, 25, 28 y 31 ya están en sentido DIRECTO — inclúyalos
-                        directamente en el
-                        promedio SIN invertir.
-                    </div>
                 </div><!-- /hexaco-a -->
 
                 <!-- FORMA B -->
@@ -1811,13 +1782,6 @@
                         </div>
                     </div>
 
-                    <div class="internal-note">
-                        <strong>⚠ NOTA INTERNA — NO mostrar al encuestado:</strong><br>
-                        FORMA B — Ítems HEXACO en sentido <strong>DIRECTO</strong>: puntaje alto = más integridad.<br>
-                        Cálculo del Índice H-H: promedio simple de los 15 ítems (18–32) <strong>SIN ninguna
-                            transformación</strong>.
-                        Rango: 1–5.
-                    </div>
                 </div><!-- /hexaco-b -->
             </section>
 
